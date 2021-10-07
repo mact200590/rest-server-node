@@ -13,9 +13,6 @@ const UserSchema = Schema({
     type: String,
     required: [true, "The name is require"],
   },
-  img: {
-    type: String,
-  },
   role: {
     type: String,
     required: [true, "The name is require"],
@@ -28,6 +25,17 @@ const UserSchema = Schema({
     type: Boolean,
     default: false,
   },
+  img: {
+    type: String,
+  },
 });
+
+
+//To rewrite toJSON method of Document
+UserSchema.methods.toJSON = function() {
+    const {password,__v , ...user}=this.toObject();
+    return user;
+};
+
 
 module.exports = model("User", UserSchema);

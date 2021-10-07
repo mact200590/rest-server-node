@@ -1,6 +1,6 @@
 const express = require("express");
 var cors = require("cors");
-const { dbConnection } = require("../controls/database/config");
+const { dbConnection } = require("../database/config");
 
 const port = process.env.PORT;
 
@@ -8,7 +8,7 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-    this.userPath = "/api/user";
+    this.userPath = "/api/users";
 
     //connection in database
     this.connectDataBase();
