@@ -12,7 +12,7 @@ const validateJWT = async (req = request, res = response, next) => {
     });
   }
   try {
-    const { ui } = jwt.verify(jwtHeader, process.env.SECRET_OR_PRIVATEKEY);
+    const { ui } = jwt.verify(jwtHeader, process.env.SECRET_OR_PRIVATE_KEY);
     const user = await User.findById(ui);
 console.log("user",user)
     if (!user) {
