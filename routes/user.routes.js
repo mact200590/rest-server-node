@@ -12,7 +12,13 @@ const {
   patchUser,
   deleteUser,
 } = require("../controls/user.controls");
-const { validateFields } = require("../middleware/validate_field");
+
+const {
+  validateFields,
+  validateJWT,
+  isAdmin,
+  haveRole,
+} = require("../middleware/index");
 
 const router = Router();
 
@@ -48,9 +54,12 @@ router.patch("/", patchUser);
 router.delete(
   "/:id",
   [
+    validateJWT,
+    haveRole("ADMIN_ROLE", "SELL_ROLE"),
+    // isAdmin,
     check("id", "The id provided is not valid").isMongoId(),
     check("id").custom(existUserId),
-    validateFields
+    validateFields,
   ],
   deleteUser
 );
