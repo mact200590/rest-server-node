@@ -33,7 +33,8 @@ const UserSchema = Schema({
 
 //To rewrite toJSON method of Document
 UserSchema.methods.toJSON = function() {
-    const {password,__v , ...user}=this.toObject();
+    const { _id,password,__v , ...user } = this.toObject();
+    user.uid=_id;
     return user;
 };
 
